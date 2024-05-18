@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <title>读取Docker配置文件</title>
+    <style>
+        .node-info {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .node-info:hover {
+            cursor: pointer;
+        }
+        .node-info img {
+            display: none;
+        }
+        .node-info:hover img {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            transform: translateX(10px);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+<td>
+    <h1>读取Docker配置文件</h1>
+    <form id="dockerForm">
+        <label for="instanceName">Docker实例名:</label>
+        <input type="text" id="instanceName" name="instanceName" pattern="[a-zA-Z0-9]{8}" title="请输入8位英数字" required>
+        <button type="button" onclick="fetchConfig()">读取配置</button>
+        <input type="hidden" id="csrfToken" name="csrfToken" value="{{ csrfToken }}">
+    </form>
+    <div id="configContent"></div>
+</td>
+
+<script>
+    function fetchConfig() {
+        var instanceName = document.getElementById("instanceName").value;
+        var csrfToken = document.getElementById("csrfToken").value;
+
+        fetch(`/getNodeInfo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({ instanceName: instanceName })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            renderNodeInfo(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function renderNodeInfo(data) {
+        var nodeInfoDiv = document.getElementById("configContent");
+        nodeInfoDiv.innerHTML = '';
+
+        var nodeInfo = data.nodeInfo;
+        var nodeInfoHTML = `
+            <div class="node-info">
+                <p><strong>实例名:</strong> ${nodeInfo.instanceName}</p>
+                <p><strong>URL:</strong> <a href="${nodeInfo.nodeUrl}" target="_blank">${nodeInfo.nodeUrl}</a></p>
+                <p><strong>创建时间:</strong> ${nodeInfo.createDateTime}</p>
+                <p><strong>地区:</strong> ${nodeInfo.region}</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${nodeInfo.nodeUrl}" alt="QR Code">
+            </div>
+        `;
+        nodeInfoDiv.innerHTML = nodeInfoHTML;
+
+        // 添加二维码功能
+        var nodeInfoElement = document.querySelector('.node-info');
+        var qrCodeImg = nodeInfoElement.querySelector('img');
+        nodeInfoElement.addEventListener('click', function() {
+            qrCodeImg.style.display = qrCodeImg.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+</script>
+</body>
+</html>
