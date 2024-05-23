@@ -49,6 +49,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             } catch (IOException e) {
                 logger.error(e.toString());
             }
+            logger.info("json file content: {}", jsonOutput);
             // 解析JSON内容
             ObjectMapper objectMapper = new ObjectMapper();
             nodeInfo = objectMapper.readValue(jsonOutput.toString(), NodeInfo.class);
