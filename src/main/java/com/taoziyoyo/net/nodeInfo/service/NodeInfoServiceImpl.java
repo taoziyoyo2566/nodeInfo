@@ -6,6 +6,7 @@ import com.taoziyoyo.net.nodeInfo.model.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,19 +51,22 @@ public class NodeInfoServiceImpl implements NodeInfoService {
                 logger.error(e.toString());
             }
             logger.info("json file content: {}", jsonOutput);
-            // 解析JSON内容
-            ObjectMapper objectMapper = new ObjectMapper();
-            nodeInfo = objectMapper.readValue(jsonOutput.toString(), NodeInfo.class);
-            System.out.println("Instance Name: " + nodeInfo.getInstanceName());
-            System.out.println("Node URL: " + nodeInfo.getNodeUrl());
-            System.out.println("Create DateTime: " + nodeInfo.getCreateDateTime());
-            System.out.println("Region: " + nodeInfo.getRegion());
+
             // 等待命令执行完成
             int exitCode = process.waitFor();
 
             if (exitCode == 0) {
-                logger.info("Command executed successfully");
                 returnResult = Result.success();
+                if(StringUtils.hasText(jsonOutput)){
+                    // 解析JSON内容
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    nodeInfo = objectMapper.readValue(jsonOutput.toString(), NodeInfo.class);
+                    logger.info("Instance Name: {}",nodeInfo.getInstanceName());
+                    logger.info("Node URL: {}",nodeInfo.getNodeUrl());
+                    logger.info("Create DateTime: {}", nodeInfo.getCreateDateTime());
+                    logger.info("Region: {}", nodeInfo.getRegion());
+                    logger.info("Command executed successfully");
+                }
             } else {
                 logger.error("Command execution failed with instanceName: " + instanceName);
             }
