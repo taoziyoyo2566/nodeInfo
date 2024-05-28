@@ -19,6 +19,7 @@
     <div id="error-message" class="error-message"></div>
     <div id="node-info-container" class="node-info-container"></div>
 </div>
+
 <div id="copy-message" class="copy-message">URL info copied to clipboard</div>
 
 <script>
@@ -61,17 +62,17 @@
     function renderNodeInfo(nodeInfo) {
         const nodeInfoContainer = document.getElementById("node-info-container");
         const nodeInfoHtml = `
-            <div class="node-info">
-                <p>ID: <span>${nodeInfo.URL_ID}</span></p>
-                <p>URL Info: <span>${nodeInfo.URL_IPV4}</span></p>
-                <button onclick="copyToClipboard('${nodeInfo.URL_IPV4}')"><i class="fas fa-copy"></i> Copy URL Info</button>
-                <button id="toggleQRCodeButton-${nodeInfo.URL_ID}" onclick="toggleQRCode('${nodeInfo.URL_IPV4}', '${nodeInfo.URL_ID}')"><i class="fas fa-qrcode"></i> Generate QR Code</button>
-                <div id="qrcode-${nodeInfo.URL_ID}" class="qrcode" style="display: none;"></div>
-                <p>Create Time: <span>${nodeInfo.CREATE_DATETIME}</span></p>
-                <p>Region: <span>${nodeInfo.REGION}</span></p>
-            </div>
-            <hr/>
-        `;
+                <div class="node-info">
+                    <p>ID: <span>${nodeInfo.URL_ID}</span></p>
+                    <p>URL Info: <span>${nodeInfo.URL_IPV4}</span></p>
+                    <button onclick="copyToClipboard('${nodeInfo.URL_IPV4}')"><i class="fas fa-copy"></i> Copy URL Info</button>
+                    <button onclick="generateQRCode('${nodeInfo.URL_IPV4}', '${nodeInfo.URL_ID}')"><i class="fas fa-qrcode"></i> Generate QR Code</button>
+                    <div id="qrcode-${nodeInfo.URL_ID}" class="qrcode"></div>
+                    <p>Create Time: <span>${nodeInfo.CREATE_DATETIME}</span></p>
+                    <p>Region: <span>${nodeInfo.REGION}</span></p>
+                </div>
+                <hr/>
+            `;
         nodeInfoContainer.innerHTML = nodeInfoHtml;
     }
 
@@ -102,23 +103,15 @@
         }, 3000);
     }
 
-    function toggleQRCode(text, id) {
-        const qrcodeDiv = document.getElementById('qrcode-' + id);
-        const toggleButton = document.getElementById('toggleQRCodeButton-' + id);
 
-        if (qrcodeDiv.style.display === 'none') {
-            qrcodeDiv.style.display = 'block';
-            toggleButton.textContent = 'hide qrcode';
-            new QRCode(qrcodeDiv, {
-                text: text,
-                width: 128,
-                height: 128
-            });
-        } else {
-            qrcodeDiv.style.display = 'none';
-            toggleButton.textContent = 'show qrcode';
-            qrcodeDiv.innerHTML = ""; // Clear previous QR code
-        }
+    function generateQRCode(text, id) {
+        const qrcodeDiv = document.getElementById('qrcode-' + id);
+        qrcodeDiv.innerHTML = ""; // Clear previous QR code
+        new QRCode(qrcodeDiv, {
+            text: text,
+            width: 128,
+            height: 128
+        });
     }
 </script>
 </body>
