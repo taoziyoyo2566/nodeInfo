@@ -3,116 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Vless Info</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/custom.js}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
-<h1>Vless Info</h1>
+<h1>Vless Info Dev</h1>
 <div class="container">
     <div class="form-group">
         <label for="instanceName">Instance Name:</label>
-        <input type="text" id="instanceName" name="instanceName" maxlength="20" pattern="[a-zA-Z0-9_]{20}" required>
-        <button id="fetchInfoButton">Fetch Info</button>
+        <div class="input-container">
+            <input type="text" id="instanceName" name="instanceName" maxlength="20" pattern="[a-zA-Z0-9_]{20}" required>
+        </div>
+
+        <div class="">
+            <button id="fetchInfoButton">Fetch Info</button>
+        </div>
     </div>
+
     <div id="error-message" class="error-message"></div>
     <div id="node-info-container" class="node-info-container"></div>
 </div>
-
 <div id="copy-message" class="copy-message">URL info copied to clipboard</div>
 
-<script>
-    document.getElementById('fetchInfoButton').addEventListener('click', fetchNodeInfo);
-
-    function fetchNodeInfo() {
-        const instanceName = document.getElementById("instanceName").value;
-        const errorMessage = document.getElementById("error-message");
-        const nodeInfoContainer = document.getElementById("node-info-container");
-
-        // Clear previous results and error messages
-        errorMessage.textContent = "";
-        nodeInfoContainer.innerHTML = "";
-
-        // Validate input
-        const regex = /^[a-zA-Z0-9_]{20}$/;
-        if (!regex.test(instanceName)) {
-            errorMessage.textContent = "Instance Name must be exactly 20 alphanumeric characters.";
-            return;
-        }
-
-        // Fetch data from API
-        $.ajax({
-            url: `/api/v1/getNodeInfo`,
-            method: 'GET',
-            data: { instanceName: instanceName },
-            success: function(data) {
-                if (data.returnFlg !== 0) {
-                    errorMessage.textContent = data.returnMSG;
-                    return;
-                }
-                renderNodeInfo(data.nodeInfo);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                errorMessage.textContent = "An error occurred while fetching data: " + textStatus + ", " + errorThrown;
-            }
-        });
-    }
-
-    function renderNodeInfo(nodeInfo) {
-        const nodeInfoContainer = document.getElementById("node-info-container");
-        const nodeInfoHtml = `
-                <div class="node-info">
-                    <p>ID: <span>${nodeInfo.URL_ID}</span></p>
-                    <p>URL Info: <span>${nodeInfo.URL_IPV4}</span></p>
-                    <button onclick="copyToClipboard('${nodeInfo.URL_IPV4}')"><i class="fas fa-copy"></i> Copy URL Info</button>
-                    <button onclick="generateQRCode('${nodeInfo.URL_IPV4}', '${nodeInfo.URL_ID}')"><i class="fas fa-qrcode"></i> Generate QR Code</button>
-                    <div id="qrcode-${nodeInfo.URL_ID}" class="qrcode"></div>
-                    <p>Create Time: <span>${nodeInfo.CREATE_DATETIME}</span></p>
-                    <p>Region: <span>${nodeInfo.REGION}</span></p>
-                </div>
-                <hr/>
-            `;
-        nodeInfoContainer.innerHTML = nodeInfoHtml;
-    }
-
-    function copyToClipboard(text) {
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(() => {
-                showCopyMessage();
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
-        } else {
-            // Fallback for browsers that do not support navigator.clipboard
-            const tempInput = document.createElement("textarea");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            showCopyMessage();
-        }
-    }
-
-    function showCopyMessage() {
-        const messageElement = document.getElementById('copy-message');
-        messageElement.classList.add('show');
-        setTimeout(() => {
-            messageElement.classList.remove('show');
-        }, 3000);
-    }
-
-
-    function generateQRCode(text, id) {
-        const qrcodeDiv = document.getElementById('qrcode-' + id);
-        qrcodeDiv.innerHTML = ""; // Clear previous QR code
-        new QRCode(qrcodeDiv, {
-            text: text,
-            width: 128,
-            height: 128
-        });
-    }
-</script>
 </body>
 </html>
