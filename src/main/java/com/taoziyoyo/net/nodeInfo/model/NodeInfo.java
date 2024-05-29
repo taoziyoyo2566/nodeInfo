@@ -23,6 +23,9 @@ public class NodeInfo implements Serializable {
     @JsonProperty("CREATE_DATETIME")
     private String createDateTime;
 
+    @JsonProperty("EXPIRE_DATETIME")
+    private String expireDateTime;
+
     @JsonProperty("REGION")
     private String region;
 

@@ -56,12 +56,20 @@ button:hover {
     margin-bottom: 20px;
 }
 
+/*.node-info {*/
+/*    background: #f9f9f9;*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+/* Node Info Styling */
+
 .node-info {
-    background: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .node-info p {
@@ -83,20 +91,189 @@ hr {
     margin-top: 10px;
 }
 
-/* Additional styling */
-body {
-    background-color: #eaeaea;
+/* styles.css */
+.copy-message {
+    visibility: hidden;
+    min-width: 200px;
+    margin-left: -100px;
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
 }
 
-.container {
-    background: linear-gradient(120deg, #f4f4f9, #ffffff);
-    border: 1px solid #ddd;
+.copy-message.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-button {
-    transition: background-color 0.3s;
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
 
-button:active {
-    background-color: #285a8e;
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
+
+/*gemini*/
+/* Basic Container Styling */
+.node-info {
+    background-color: #f8f9fa; /* Light background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Information Item Styling */
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-item label {
+    font-weight: bold;
+    display: block;
+}
+
+.info-item span {
+    word-break: break-all; /* Allow long URLs to wrap */
+}
+
+/* Button Group Styling */
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-group button {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* QR Code Styling */
+.qrcode {
+    margin-top: 15px;
+}
+
+.qrcode img { /* Style the QR code image */
+    width: 150px; /* Adjust the size as needed */
+    height: 150px;
+}
+
+/* Form Styling */
+#fetchInfoForm {
+    display: flex; /* Arrange form elements horizontally */
+    gap: 10px; /* Add space between form elements */
+}
+
+#instanceName {
+    flex-grow: 1; /* Allow the input field to expand and fill available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Error Message Styling */
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.url-info {
+    display: inline-block;
+    max-width: 200px; /* Adjust the width as needed */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long URLs */
+    white-space: nowrap;
+}
+
+/* Preserve line breaks in the full URL */
+.url-info-detail {
+    /*white-space: pre-wrap;*/
+    word-break: break-all;
+    /*max-width: 400px; !* 或者根据您的需要调整宽度 *!*/
+    overflow-x: auto; /* 可选，如果需要滚动条 */
+}
+
+/* ... other styles ... */
+.input-group {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.input-group > input {
+    margin-right: 10px; /* 在输入框和按钮之间添加一些间距 */
+}
+
+/*!* 为表单组件添加样式 *!*/
+/*.form-group {*/
+/*    margin-bottom: 15px; !* 在表单组与其他元素之间添加间距 *!*/
+/*}*/
+
+/*!* 为标签添加样式 *!*/
+/*label {*/
+/*    display: block; !* 使标签独占一行 *!*/
+/*    margin-bottom: 5px; !* 在标签与输入框之间添加间距 *!*/
+/*}*/
+
+/*!* 为输入容器添加样式 *!*/
+.input-container {
+    /*display: flex; !* 使用flex布局使内容在垂直方向排列 *!*/
+    flex-direction: column; /* 改变主轴方向为垂直 */
+    gap: 10px; /* 在元素之间添加间隔 */
+    padding: 8px 12px; /* 减少左右内边距 */
+}
+
+.input-container input[type="text"] {
+    width: 100%; /* 输入框占据容器内的所有可用宽度 */
+    /*padding: 8px;*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* 包括内边距和边框 */
+}
+
+/*!* 为输入框和按钮添加样式 *!*/
+.input[type="text"], button {
+    padding: 8px 10px; /* 增加内边距使得更易点击和阅读 */
+    /*width: 100%; !* 宽度设置为100%，使元素独占一行 *!*/
+}
+
+/*!*button {*!*/
+/*!*    cursor: pointer; !* 鼠标悬停在按钮上时显示指针手势 *!*!*/
+/*!*    background-color: #007bff; !* 设置按钮的背景色 *!*!*/
+/*!*    color: white; !* 设置按钮文字颜色为白色 *!*!*/
+/*!*    border: none; !* 移除边框 *!*!*/
+/*!*    border-radius: 4px; !* 添加边角圆度 *!*!*/
+/*!*}*!*/
+
+button:hover {
+    background-color: #0056b3; /* 鼠标悬停时改变按钮颜色 */
+}
+

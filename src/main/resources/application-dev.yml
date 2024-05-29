@@ -13,15 +13,14 @@ spring:
   web:
     resources:
       static-locations: classpath:/static-dev/
-
-  mvc:
-    static-path-pattern: /static-dev/**
-    compression:
-      enabled: true
-      mime-types:
-        - text/html
-        - text/css
-        - application/javascript
+      #  mvc:
+      #    static-path-pattern: /static-dev/**
+      #    compression:
+      #      enabled: true
+      #      mime-types:
+      #        - text/html
+      #        - text/css
+      #        - application/javascript
 
 
       #database: 0 # 指定数据库序号
