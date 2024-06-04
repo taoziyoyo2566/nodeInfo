@@ -50,7 +50,7 @@ function renderNodeInfo(nodeInfo) {
             <button id="toggleQRCodeButton-${nodeInfo.URL_ID}" onclick="toggleQRCode('${nodeInfo.URL_IPV4}', '${nodeInfo.URL_ID}')"><i class="fas fa-qrcode"></i> Generate QR Code</button>
             <div id="qrcode-${nodeInfo.URL_ID}" class="qrcode" style="display: none;"></div>
             <p>Create Date: <span>${nodeInfo.CREATE_DATETIME}</span></p>
-            <p>Expire Date: <span>${nodeInfo.EXPIRE_DATETIME}</span></p>
+            <p>Create Date: <span>${nodeInfo.EXPIRE_DATETIME}</span></p>
             
             <p>Region: <span>${nodeInfo.REGION}</span></p>
         </div>
