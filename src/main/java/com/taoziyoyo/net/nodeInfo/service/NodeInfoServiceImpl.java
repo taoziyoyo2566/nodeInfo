@@ -17,10 +17,10 @@ import java.util.List;
 
 @Service
 public class NodeInfoServiceImpl implements NodeInfoService {
-    Logger logger = LoggerFactory.getLogger(NodeInfoServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(NodeInfoServiceImpl.class);
     /**
-     * @param instanceName
-     * @return
+     * @param instanceName String
+     * @return Result
      */
     @Override
     public Result getNodeInfo(String instanceName) {
@@ -34,7 +34,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             command.add(instanceName);
             command.add("cat");
             command.add("vless_info.json");
-            logger.info("Executing command: " + command);
+            logger.info("Executing command: {}", command);
             ProcessBuilder processBuilder = new ProcessBuilder(command);
             Process process = processBuilder.start();
 
@@ -68,7 +68,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
                     logger.info("Command executed successfully");
                 }
             } else {
-                logger.error("Command execution failed with instanceName: " + instanceName);
+                logger.error("Command execution failed with instanceName: {}", instanceName);
             }
         } catch (Exception e) {
             logger.error(e.toString());

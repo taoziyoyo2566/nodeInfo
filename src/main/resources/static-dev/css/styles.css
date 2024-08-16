@@ -20,9 +20,20 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .form-group {
-    margin-bottom: 20px;
+     display: flex;
+     align-items: center;
 }
+
+.form-group label {
+    margin-right: 10px;
+}
+
+.form-group input {
+    margin-right: 150px;
+}
+
 
 label {
     display: block;

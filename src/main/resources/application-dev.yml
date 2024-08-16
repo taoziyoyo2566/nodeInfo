@@ -1,6 +1,10 @@
 spring:
   application:
     name: nodeInfo
+  security:
+    user:
+      name: nodeInfo
+      password: nodeInfo
   data:
     redis:
       ## 单机模式
@@ -37,3 +41,5 @@ spring:
 #          max-wait: -1ms # 最大阻塞等待时间（默认-1，负数表示没限制）
 #      ssl:
 #        enabled: false
+
+

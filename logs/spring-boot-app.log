@@ -1,0 +1,51 @@
+2024-08-16 17:01:10.028 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - Starting NodeInfoApplication using Java 22.0.2 with PID 25221 (/Users/taoziyoyo/IdeaProjects/nodeInfo/target/classes started by taoziyoyo in /Users/taoziyoyo/IdeaProjects/nodeInfo)
+2024-08-16 17:01:10.029 [restartedMain] DEBUG c.t.net.nodeInfo.NodeInfoApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2024-08-16 17:01:10.030 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - The following 1 profile is active: "dev"
+2024-08-16 17:01:10.046 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-16 17:01:10.046 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-16 17:01:10.285 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 17:01:10.287 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-08-16 17:01:10.302 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2024-08-16 17:01:10.511 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-16 17:01:10.515 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-16 17:01:10.520 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-16 17:01:10.520 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-08-16 17:01:10.536 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-16 17:01:10.536 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 490 ms
+2024-08-16 17:01:10.738 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2024-08-16 17:01:10.910 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@107e3c71, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2191e488, org.springframework.security.web.context.SecurityContextHolderFilter@42ff163, org.springframework.security.web.header.HeaderWriterFilter@230ece52, org.springframework.web.filter.CorsFilter@19b1f6ff, org.springframework.security.web.csrf.CsrfFilter@32c9d6ab, org.springframework.security.web.authentication.logout.LogoutFilter@274ead6f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5249452c, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@20108e16, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2be1968e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@79f904e2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e34fad9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@64dc97ae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a1dba37, org.springframework.security.web.access.ExceptionTranslationFilter@29c8d79e, org.springframework.security.web.access.intercept.AuthorizationFilter@beecbe8]
+2024-08-16 17:01:10.938 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-08-16 17:01:10.945 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-16 17:01:10.952 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2024-08-16 17:01:10.957 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - Started NodeInfoApplication in 1.185 seconds (process running for 1.353)
+2024-08-16 17:01:10.959 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - NodeInfo start CommandRunner
+2024-08-16 17:01:20.511 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-16 17:01:20.511 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-08-16 17:01:20.512 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-08-16 17:02:03.158 [http-nio-8080-exec-8] INFO  c.t.n.n.c.NodeInfoController - get node info started
+2024-08-16 17:02:03.158 [http-nio-8080-exec-8] INFO  c.t.n.n.service.NodeInfoServiceImpl - Executing command: [docker, exec, vless_reality_90980f, cat, vless_info.json]
+2024-08-16 17:02:03.165 [http-nio-8080-exec-8] ERROR c.t.n.n.service.NodeInfoServiceImpl - java.io.IOException: Cannot run program "docker": error=2, No such file or directory
+2024-08-16 17:02:03.166 [http-nio-8080-exec-8] INFO  c.t.n.n.c.NodeInfoController - get node info finished
+2024-08-16 17:05:15.144 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2024-08-16 17:05:15.152 [Thread-6] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2024-08-16 17:05:26.162 [Thread-6] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-08-16 17:05:26.252 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - Starting NodeInfoApplication using Java 22.0.2 with PID 25221 (/Users/taoziyoyo/IdeaProjects/nodeInfo/target/classes started by taoziyoyo in /Users/taoziyoyo/IdeaProjects/nodeInfo)
+2024-08-16 17:05:26.252 [restartedMain] DEBUG c.t.net.nodeInfo.NodeInfoApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2024-08-16 17:05:26.252 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - The following 1 profile is active: "dev"
+2024-08-16 17:05:26.306 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 17:05:26.306 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-08-16 17:05:26.308 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2024-08-16 17:05:26.339 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-16 17:05:26.339 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-16 17:05:26.340 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-16 17:05:26.340 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-08-16 17:05:26.343 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-16 17:05:26.343 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 90 ms
+2024-08-16 17:05:26.360 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2024-08-16 17:05:26.393 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4769bc03, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6fe2ef53, org.springframework.security.web.context.SecurityContextHolderFilter@8b67983, org.springframework.security.web.header.HeaderWriterFilter@27b08d2c, org.springframework.web.filter.CorsFilter@59f753f1, org.springframework.security.web.csrf.CsrfFilter@46636154, org.springframework.security.web.authentication.logout.LogoutFilter@50044d68, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1d3562dc, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@28849322, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@76e8933b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6fa8131f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5582d000, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b7ea68c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7ceba041, org.springframework.security.web.access.ExceptionTranslationFilter@70d5cee2, org.springframework.security.web.access.intercept.AuthorizationFilter@22a14055]
+2024-08-16 17:05:26.397 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-08-16 17:05:26.400 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-16 17:05:26.400 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2024-08-16 17:05:26.402 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - Started NodeInfoApplication in 0.167 seconds (process running for 256.802)
+2024-08-16 17:05:26.402 [restartedMain] INFO  c.t.net.nodeInfo.NodeInfoApplication - NodeInfo start CommandRunner
+2024-08-16 17:05:26.403 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
