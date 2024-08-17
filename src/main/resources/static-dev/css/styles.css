@@ -20,32 +20,23 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .form-group {
-     display: flex;
-     align-items: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     margin-right: 10px;
-}
-
-.form-group input {
-    margin-right: 150px;
-}
-
-
-label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
 }
 
-input[type="text"] {
-    width: 100%;
+.form-group input {
+    flex-grow: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 button {
@@ -56,6 +47,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin-right: 10px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -67,42 +59,7 @@ button:hover {
     margin-bottom: 20px;
 }
 
-/*.node-info {*/
-/*    background: #f9f9f9;*/
-/*    padding: 10px;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 4px;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-/* Node Info Styling */
-
-.node-info {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.node-info p {
-    margin: 10px 0;
-}
-
-.node-info span {
-    font-weight: bold;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: #ddd;
-    margin: 20px 0;
-}
-
-.qrcode {
-    margin-top: 10px;
-}
-
-/* styles.css */
+/* Copy Message Styling */
 .copy-message {
     visibility: hidden;
     min-width: 200px;
@@ -146,25 +103,6 @@ hr {
     }
 }
 
-/*gemini*/
-/* Basic Container Styling */
-.node-info {
-    background-color: #f8f9fa; /* Light background */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Information Item Styling */
-.info-item {
-    margin-bottom: 10px;
-}
-
-.info-item label {
-    font-weight: bold;
-    display: block;
-}
-
 .info-item span {
     word-break: break-all; /* Allow long URLs to wrap */
 }
@@ -193,7 +131,7 @@ hr {
     margin-top: 15px;
 }
 
-.qrcode img { /* Style the QR code image */
+.qrcode img {
     width: 150px; /* Adjust the size as needed */
     height: 150px;
 }
@@ -205,10 +143,11 @@ hr {
 }
 
 #instanceName {
-    flex-grow: 1; /* Allow the input field to expand and fill available space */
+    flex-grow: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 /* Error Message Styling */
@@ -217,74 +156,53 @@ hr {
     margin-top: 10px;
 }
 
+/* URL Info Styling */
 .url-info {
     display: inline-block;
-    max-width: 200px; /* Adjust the width as needed */
+    max-width: 200px;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for long URLs */
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Preserve line breaks in the full URL */
 .url-info-detail {
-    /*white-space: pre-wrap;*/
     word-break: break-all;
-    /*max-width: 400px; !* 或者根据您的需要调整宽度 *!*/
-    overflow-x: auto; /* 可选，如果需要滚动条 */
+    overflow-x: auto;
 }
 
-/* ... other styles ... */
+/* Input Group Styling */
 .input-group {
     display: flex;
-    align-items: center; /* 垂直居中对齐 */
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .input-group > input {
-    margin-right: 10px; /* 在输入框和按钮之间添加一些间距 */
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-/*!* 为表单组件添加样式 *!*/
-/*.form-group {*/
-/*    margin-bottom: 15px; !* 在表单组与其他元素之间添加间距 *!*/
-/*}*/
-
-/*!* 为标签添加样式 *!*/
-/*label {*/
-/*    display: block; !* 使标签独占一行 *!*/
-/*    margin-bottom: 5px; !* 在标签与输入框之间添加间距 *!*/
-/*}*/
-
-/*!* 为输入容器添加样式 *!*/
+/* Input Container Styling */
 .input-container {
-    /*display: flex; !* 使用flex布局使内容在垂直方向排列 *!*/
-    flex-direction: column; /* 改变主轴方向为垂直 */
-    gap: 10px; /* 在元素之间添加间隔 */
-    padding: 8px 12px; /* 减少左右内边距 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 12px;
 }
 
 .input-container input[type="text"] {
-    width: 100%; /* 输入框占据容器内的所有可用宽度 */
-    /*padding: 8px;*/
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* 包括内边距和边框 */
+    box-sizing: border-box;
 }
 
-/*!* 为输入框和按钮添加样式 *!*/
-.input[type="text"], button {
-    padding: 8px 10px; /* 增加内边距使得更易点击和阅读 */
-    /*width: 100%; !* 宽度设置为100%，使元素独占一行 *!*/
-}
-
-/*!*button {*!*/
-/*!*    cursor: pointer; !* 鼠标悬停在按钮上时显示指针手势 *!*!*/
-/*!*    background-color: #007bff; !* 设置按钮的背景色 *!*!*/
-/*!*    color: white; !* 设置按钮文字颜色为白色 *!*!*/
-/*!*    border: none; !* 移除边框 *!*!*/
-/*!*    border-radius: 4px; !* 添加边角圆度 *!*!*/
-/*!*}*!*/
-
+/* General Button Hover Effect */
 button:hover {
-    background-color: #0056b3; /* 鼠标悬停时改变按钮颜色 */
+    background-color: #0056b3; /* Darker blue on hover */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
 }
-

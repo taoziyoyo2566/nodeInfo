@@ -1,11 +1,18 @@
-<!-- src/main/resources/templates/fragments/node-info.html -->
 <div class="node-info" th:fragment="nodeInfo (nodeInfo)">
-    <p>ID: <span th:text="${nodeInfo.URL_ID}"></span></p>
-    <p>URL Info: <span th:text="${nodeInfo.URL_IPV4}"></span></p>
-    <button th:onclick="'copyToClipboard(\'' + ${nodeInfo.URL_IPV4} + '\')'"><i class="fas fa-copy"></i> Copy URL Info</button>
-    <button th:id="'toggleQRCodeButton-' + ${nodeInfo.URL_ID}" th:onclick="'toggleQRCode(\'' + ${nodeInfo.URL_IPV4} + '\', \'' + ${nodeInfo.URL_ID} + '\')'"><i class="fas fa-qrcode"></i> Generate QR Code</button>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <p>ID: <span th:text="${nodeInfo.URL_ID}"></span></p>
+        <div style="display: flex; gap: 10px;">
+            <button th:onclick="'copyToClipboard(\'' + ${nodeInfo.URL_IPV4} + '\')'"><i class="fas fa-copy"></i> Copy URL Info</button>
+            <button th:id="'toggleQRCodeButton-' + ${nodeInfo.URL_ID}" th:onclick="'toggleQRCode(\'' + ${nodeInfo.URL_IPV4} + '\', \'' + ${nodeInfo.URL_ID} + '\')'"><i class="fas fa-qrcode"></i> Generate QR Code</button>
+        </div>
+    </div>
     <div th:id="'qrcode-' + ${nodeInfo.URL_ID}" class="qrcode" style="display: none;"></div>
+    <div style="margin-top: 10px;">
+        <p>URL Info: <span th:text="${nodeInfo.URL_IPV4}"></span></p>
+        <button>Show More</button>
+    </div>
     <p>Create Time: <span th:text="${nodeInfo.CREATE_DATETIME}"></span></p>
+    <p>Create Date: <span th:text="${nodeInfo.CREATE_DATE}"></span></p>
     <p>Region: <span th:text="${nodeInfo.REGION}"></span></p>
 </div>
 <hr/>

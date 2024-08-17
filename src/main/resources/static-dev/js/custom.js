@@ -10,9 +10,9 @@ function fetchNodeInfo() {
     nodeInfoContainer.innerHTML = "";
 
     // Validate input
-    const regex = /^[a-zA-Z0-9_]{20}$/;
+    const regex = /^[a-zA-Z0-9_]{22}$/;
     if (!regex.test(instanceName)) {
-        errorMessage.textContent = "Instance Name must be exactly 20 alphanumeric characters.";
+        errorMessage.textContent = "Instance Name must be exactly 22 alphanumeric characters.";
         return;
     }
 

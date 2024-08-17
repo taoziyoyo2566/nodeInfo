@@ -1,8 +1,11 @@
 package com.taoziyoyo.net.nodeInfo.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.taoziyoyo.net.nodeInfo.model.NodeInfo;
 import com.taoziyoyo.net.nodeInfo.model.Result;
+import com.taoziyoyo.net.nodeInfo.utils.DockerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class NodeInfoServiceImpl implements NodeInfoService {
     private static final Logger logger = LoggerFactory.getLogger(NodeInfoServiceImpl.class);
+
+    private final DockerUtils dockerUtils = new DockerUtils();
+
     /**
      * @param instanceName String
      * @return Result
@@ -25,57 +32,54 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     @Override
     public Result getNodeInfo(String instanceName) {
 
+        String filePath = "vless_info.json";
+        Result result = new Result();
+        List<String> commands = Arrays.asList("docker", "exec", instanceName, "cat", filePath);
+        ProcessBuilder processBuilder = new ProcessBuilder(commands);
+        processBuilder.redirectErrorStream(true);
+        Process process = null;
         NodeInfo nodeInfo = null;
-        Result returnResult = Result.failed("uncompleted process");
+        StringBuilder jsonContent = null;
         try {
-            List<String> command = new ArrayList<>();
-            command.add("docker");
-            command.add("exec");
-            command.add(instanceName);
-            command.add("cat");
-            command.add("vless_info.json");
-            logger.info("Executing command: {}", command);
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-            Process process = processBuilder.start();
+            process = processBuilder.start();
 
-            // 读取命令执行的输出内容
-            StringBuilder jsonOutput = new StringBuilder();
-            try (InputStream inputStream = process.getInputStream();
-                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    jsonOutput.append(line);
-                }
-            } catch (IOException e) {
-                logger.error(e.toString());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            jsonContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonContent.append(line);
             }
-            logger.info("json file content: {}", jsonOutput);
 
-            // 等待命令执行完成
-            int exitCode = process.waitFor();
+            int exitCode = 100;
+            try {
+                exitCode = process.waitFor();
+            } catch (InterruptedException e) {
+                logger.error("docker exec InterruptedException: {}", e.getLocalizedMessage());
+            }
 
-            if (exitCode == 0) {
-                returnResult = Result.success();
-                if(StringUtils.hasText(jsonOutput)){
-                    // 解析JSON内容
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    nodeInfo = objectMapper.readValue(jsonOutput.toString(), NodeInfo.class);
-                    logger.info("Instance Name: {}",nodeInfo.getInstanceName());
-                    logger.info("Node URL: {}",nodeInfo.getNodeUrl());
-                    logger.info("Create DateTime: {}", nodeInfo.getCreateDateTime());
-                    logger.info("Region: {}", nodeInfo.getRegion());
+            reader.close();
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                if (exitCode == 0) {
                     logger.info("Command executed successfully");
+                    nodeInfo = objectMapper.readValue(jsonContent.toString(), NodeInfo.class);
+                    logger.info("nodeInfo: {}", nodeInfo.getNodeUrl());
+                    result = Result.success();
+                    result.put("nodeInfo",nodeInfo);
+                } else {
+                    String message = jsonContent.substring(jsonContent.indexOf(":") + 1).trim();
+                    logger.error("error message: {}", message);
+                    result = Result.failed(message);
+                    logger.error("Command execution failed with instanceName: {}", instanceName);
                 }
-            } else {
-                logger.error("Command execution failed with instanceName: {}", instanceName);
+            } catch (JsonProcessingException e) {
+                logger.error("Json processing exception: {}", e.getLocalizedMessage());
             }
-        } catch (Exception e) {
-            logger.error(e.toString());
+        } catch (IOException e) {
+            logger.error("json file read exception: {}", e.getLocalizedMessage());
         }
-        returnResult.put("nodeInfo", nodeInfo);
 
-
-        return returnResult;
+        return result;
     }
 }
